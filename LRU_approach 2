@@ -1,0 +1,103 @@
+public class Solution {
+
+    int capacity;
+    HashMap<Integer,Node> hm;
+    Node head = new Node(-1, -1); // dummy head
+    Node tail = new Node(-1, -1);
+ 
+    
+    public Solution(int capacity) {
+        this.capacity = capacity;
+        hm = new HashMap();
+            head.next = tail; // initially, head's next should point to tail
+    tail.prev = head;
+        
+    }
+    
+    public int get(int key) {
+
+        Node node = hm.get(key);
+        if(node == null){
+            return -1;
+        }
+        else{
+            int v1 = node.value;
+            moveToFront(node);
+            return v1;
+        }
+        
+    }
+    
+    public void set(int key, int value) {
+
+        if(hm.containsKey(key)){
+            Node node = hm.get(key);
+            node.value =value;
+            moveToFront(node);
+            return;
+        }
+
+        Node n = new Node(key,value);
+
+        if(hm.size()>=capacity){
+            Node toBeRemoved = tail.prev;
+            
+            hm.remove(tail.prev.key);
+            deleteNode(toBeRemoved);
+
+
+        }
+
+        moveToFront(n);
+        hm.put(key,n);
+    
+
+        
+    }
+
+    public void deleteNode(Node n){
+
+        n.next.prev = n.prev;
+        n.prev.next = n.next;
+
+        n.next = null; 
+         n.prev= null;
+
+
+
+    }
+
+    public void moveToFront(Node n){
+          if(n.prev != null) {
+        deleteNode(n);
+    }
+        addNode(n);
+    }
+
+
+    private void addNode(Node n){
+        n.next = head.next;
+        n.prev = head;
+
+        n.next.prev =n;
+        head.next = n;
+
+
+    }
+
+
+    class Node {
+
+        Node prev =null;
+        Node next =null;
+        int value;
+        int key;
+
+        public Node(int key, int value){
+            this.value = value;
+            this.key =key;
+
+        }
+
+    }
+}
