@@ -6,8 +6,14 @@ class Solution {
         Boolean check = false;
         for(int i = 0; i< s.length(); i++){
 
-            if( !st.isEmpty() && s.charAt(i) == ')'){
-                if(st.peek() ==  '(' && !st.isEmpty()){
+            if(s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+                st.push(s.charAt(i));
+            }
+
+            else if( !st.isEmpty() ){
+                if( st.peek() ==  '(' && s.charAt(i) == ')'
+                || s.charAt(i) == '}' && st.peek() ==  '{'
+                ||  st.peek() ==  '[' && s.charAt(i) == ']'){
                 check = true;
                 st.pop();
                 }
@@ -15,32 +21,13 @@ class Solution {
                      return false;
                 }
             }
-            
-           else if(s.charAt(i) == '}'){
-              if( !st.isEmpty() && st.peek() ==  '{'){
-                check = true;
-                st.pop();
-                }
-                 else{
-                     return false;
-                }
-            }
-            else if(s.charAt(i) == ']'){
-              if(!st.isEmpty() && st.peek() ==  '[' ){
-                  st.pop();
-                check = true;
-                }
-                 else{
-                     return false;
-                }
-            }
             else{
-                st.push(s.charAt(i));
+                return false;
             }
 
         }
 
-        return st.isEmpty() ? check : false;
+        return st.isEmpty();
         
     }
 }
