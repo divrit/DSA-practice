@@ -1,0 +1,94 @@
+class LRUCache {
+
+
+    // because it is a doubly lL so we will have prev pointer as well.
+    static class Node{
+        int key;
+        int value;
+        Node prev;
+        Node next;
+
+    } 
+
+    HashMap<Integer, Node> hm;
+    Node head, tail;
+    int capactiy;
+   
+
+
+    // we will point head to tail and tail prev to head initially.
+    public LRUCache(int capacity) {
+        hm = new HashMap();
+        head = new Node();
+        tail = new Node();
+        this.capactiy = capacity;
+        head.next = tail;
+        tail.prev = head;
+     
+    }
+    
+    public int get(int key) {
+
+
+        if(hm.containsKey(key)){
+            Node n = hm.get(key);
+            remove(n);
+            insertAtHead(n);
+        return n.value;
+        }
+        return -1;
+        
+    }
+    
+    public void put(int key, int value) {
+
+       
+
+        if(hm.containsKey(key)){
+            Node n = hm.get(key);
+            n.value = value;
+                remove(n);
+             insertAtHead(n);
+        }
+        else{
+            if(hm.size() == capactiy){
+                hm.remove(tail.prev.key);
+                remove(tail.prev);
+
+            }
+            Node n = new Node();
+            n.key = key;
+            n.value = value;
+            hm.put(key, n);
+            insertAtHead(n);
+
+        }  
+   
+       
+    }
+
+
+    public void remove(Node n){
+            n.prev.next = n.next;
+            n.next.prev = n.prev;
+
+    }
+    private void insertAtHead(Node node){
+        node.next = head.next;
+        head.next.prev = node;
+        head.next = node;
+        node.prev= head;
+       
+
+    }
+
+
+
+}
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
