@@ -1,3 +1,5 @@
+// we are using an extra DS here which is Queue, which makes it have space complexity of o(n).
+
 /**
  * Definition for binary tree
  * class TreeNode {
