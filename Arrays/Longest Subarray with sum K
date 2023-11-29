@@ -1,0 +1,35 @@
+import java.util.HashMap;
+
+public class Solution {
+    public static int longestSubarrayWithSumK(int []a, long k) {
+            
+            // Write your code here
+
+            long pfSum = 0;
+            int maxL = 0;
+            HashMap<Long, Integer> hm = new HashMap<>();
+            for(int i=0; i< a.length; i++){
+
+                pfSum += a[i];
+                long rem = pfSum - k;
+                if(pfSum == k){
+                    maxL = Math.max(maxL, i+1);
+                }
+
+              
+               
+                else if(hm.containsKey(rem)){
+                            int len = i - hm.get(rem);
+                             maxL = Math.max(maxL, len);
+                }
+
+                if(a[i] != 0)
+                hm.put(pfSum, i);
+
+
+
+            }
+
+            return maxL;
+    }
+}
