@@ -1,0 +1,39 @@
+    class Solution {
+        public int search(int[] nums, int target) {
+
+
+
+            int low = 0;
+            int high = nums.length-1;
+            
+           
+
+       return binarySearch(low, high, nums, target);
+
+    }
+
+
+    public int binarySearch(int low, int high, int[] nums, int target){
+             int mid  = (low + high)/2;
+            if(low > high){
+                return -1;
+            }
+
+            if(nums[mid] == target){
+                return mid;
+            }
+
+            else if(nums[mid] < target){
+            low = mid +1;
+             return binarySearch(low,high,nums, target);
+            }
+
+            
+            else {
+            high = mid -1;
+            return  binarySearch(low,high,nums, target);
+      
+        }
+            }
+
+    }
