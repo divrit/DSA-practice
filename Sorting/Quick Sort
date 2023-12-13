@@ -1,0 +1,63 @@
+
+public class Solution {
+	
+	public static void quickSort(int[] input,int startIndex, int endIndex) {
+
+			int low = startIndex;
+			int high = endIndex;
+
+			if(low<high){
+				int pindex = partition(input, low, high);
+				quickSort(input, low, pindex -1);
+				quickSort(input, pindex+1, high);
+
+			}
+
+
+		
+	}
+
+
+
+
+	public static  int partition(int [] arr , int low, int high){
+
+		int piviot = arr[low];
+
+		int i = low;
+		int j = high;
+		while(i < j){
+
+
+			while(  i <= high && arr[i] <= piviot ){
+				i++;
+			}
+
+			while(j>= low && arr[j] > piviot ){
+				j--;
+			}
+
+
+			if(i < j){
+				int temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+
+
+		}
+
+		arr[low] = arr[j];
+		arr[j] =  piviot;
+
+
+return j;
+
+	}
+
+
+
+
+
+	
+}
