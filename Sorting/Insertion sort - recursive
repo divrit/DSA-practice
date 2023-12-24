@@ -1,0 +1,50 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+        
+        sort(nums, nums.length);
+
+        return nums;
+
+
+
+    }
+
+
+
+    public void sort(int [] nums, int length){
+
+        if(length <= 1){
+            return;
+        }
+
+
+        int lastElement = nums[length-1];
+
+        sort(nums, length -1);
+
+        insert(nums, lastElement, length-1);
+
+
+    }
+
+
+
+
+    public void insert(int arr[], int lastElement, int length){
+
+
+        if(length == 0 || arr[length -1] <= lastElement){
+
+
+            arr[length] = lastElement;
+            return;
+        }
+
+
+
+        int biggerEle = arr[length-1];
+        insert(arr,lastElement, length-1);
+
+        arr[length] = biggerEle;
+    }
+}
