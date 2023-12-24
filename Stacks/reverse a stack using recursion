@@ -1,0 +1,40 @@
+import java.util.Stack;
+
+public class Solution {
+    
+	public static void reverseStack(Stack<Integer> stack) {
+		// write your code here
+
+
+		
+		if(stack.isEmpty()){
+			return;
+		}
+		int x = stack.pop();
+	
+		reverseStack(stack);
+		
+		insert(stack, x);
+		
+		
+	}
+
+
+	public static void insert(Stack<Integer> st, int ele){
+
+
+		if(st.isEmpty()){
+			st.push(ele);
+			return;
+		}
+
+
+		int xxx= st.pop();
+		insert(st, ele);
+		st.push(xxx);
+
+
+
+	}
+
+}
