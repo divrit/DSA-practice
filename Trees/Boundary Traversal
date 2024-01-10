@@ -1,0 +1,114 @@
+/************************************************************
+
+ Following is the Binary Tree node structure:
+
+ class TreeNode {
+     int data;
+     TreeNode left;
+     TreeNode right;
+
+     TreeNode(int data) {
+         this.data = data;
+         this.left = null;
+         this.right = null;
+     }
+ }
+
+ ************************************************************/
+
+import java.util.List;
+import java.util.LinkedList;
+
+public class Solution {
+
+    static List<Integer>  result = new LinkedList();
+    public static List<Integer> traverseBoundary(TreeNode root){
+        // Write your code here.
+        if(root == null){
+            return result;
+        }
+        result.add(root.data);
+
+        leftTree(root.left);
+        leafTree(root);
+        rightTree(root.right);
+        return result;
+    }
+
+
+    public static void leftTree(TreeNode root){
+
+        if(root == null ){
+            return;
+        }
+
+        if(root.left!=null){
+             result.add(root.data);
+            leftTree(root.left);
+           
+        }
+        else if(root.right!=null){
+             result.add(root.data);
+            leftTree(root.right);
+            
+        }
+
+
+
+
+
+
+    }
+
+    public static void leafTree(TreeNode root){
+        if(root == null){
+            return;
+        }
+        if(root.left!= null){
+            leafTree(root.left);
+        }
+        if(root.left == null && root.right == null){
+            result.add(root.data);
+        }
+
+       
+            leafTree(root.right);
+     
+
+
+
+    }
+
+
+   public  static void rightTree(TreeNode root){
+
+        if(root == null ){
+            return;
+        }
+
+        if(root.right!=null){
+            rightTree(root.right);
+          
+        }
+        else if(root.left!=null){
+            rightTree(root.left);
+            
+
+        }
+
+        if(root.left != null || root.right!=null)
+         result.add(root.data);
+        
+
+
+
+
+
+    }
+
+
+
+
+
+
+}
