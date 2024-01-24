@@ -1,0 +1,61 @@
+
+import java.util.List;
+import java.util.LinkedList;
+public class Solution {
+   static List<Integer> result = new LinkedList();
+    public static List<Integer> predecessorSuccessor(TreeNode root, int key) {
+        // Write your code here.
+        if(root == null)
+        return result;
+
+      
+        result.add(Predescessor(root,key));
+          result.add(Successor(root,key));
+
+
+ return result;
+    }
+
+
+    private static int Successor(TreeNode root, int key){
+
+
+        
+        int suck = -1;
+
+        while(root!= null){
+        if(root.data <= key){
+           root= root.right;
+        }
+        else{
+            suck = root.data;
+           root= root.left;
+        }
+
+      
+        }
+          return suck;
+    }
+
+
+
+    
+    private static int Predescessor(TreeNode root, int key){
+
+        
+        
+        int suck = -1;
+        while(root!=null){
+        if(root.data >= key){
+             
+          root =root.left;
+        }
+        else{
+            suck = root.data;
+         root= root.right;
+        }
+        }
+
+        return suck;
+    }
+}
