@@ -1,0 +1,32 @@
+class Solution {
+// this is the best approach but not optimal, as we need to use sort in this.
+   
+    int count = 1;
+    public int longestConsecutive(int[] nums) {
+        Arrays.sort(nums);
+
+        if(nums.length<= 1){
+            return nums.length;
+        }
+         int smallest  = nums[0];
+          
+            int maxCount = 0;
+            for(int  i  = 1 ; i < nums.length; i++){
+
+                if(smallest ==  nums[i]-1){
+                    count++;
+                }
+                if(maxCount< count){
+                    maxCount = count;
+                }
+                if(smallest < nums[i] - 1){
+                   count = 1;
+                }
+
+
+                smallest = nums[i];
+            }
+
+                 return maxCount;
+    }
+}
